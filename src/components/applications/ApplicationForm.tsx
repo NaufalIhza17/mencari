@@ -189,7 +189,7 @@ function DatePicker({
           </svg>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent className="w-auto p-0 rounded-2xl overflow-clip" align="start">
         <Calendar
           mode="single"
           selected={date}
@@ -199,7 +199,7 @@ function DatePicker({
               setOpen(false);
             }
           }}
-          className="min-w-2xs min-h-fit"
+          className="min-w-52 h-fit"
         />
       </PopoverContent>
     </Popover>

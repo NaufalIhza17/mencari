@@ -28,7 +28,7 @@ const schema = z.object({
   priority: z.enum(["Low", "Medium", "High"]),
   source: z.string().optional(),
   notes: z.string().optional(),
-  salary_mode: z.enum(["exact", "range", "negotiable"]),
+  salary_mode: z.enum(["Exact", "Range", "Negotiable"]),
   salary_amount: z.string().optional(),
   salary_min: z.string().optional(),
   salary_max: z.string().optional(),
@@ -199,7 +199,7 @@ function DatePicker({
               setOpen(false);
             }
           }}
-          className="min-w-2xs"
+          className="min-w-2xs min-h-fit"
         />
       </PopoverContent>
     </Popover>
@@ -242,7 +242,7 @@ export default function ApplicationForm({
       priority: defaultValues?.priority || "Medium",
       source: defaultValues?.source || "",
       notes: defaultValues?.notes || "",
-      salary_mode: defaultValues?.salary?.mode || "negotiable",
+      salary_mode: defaultValues?.salary?.mode || "Negotiable",
       salary_amount: defaultValues?.salary?.amount?.toString() || "",
       salary_min: defaultValues?.salary?.min?.toString() || "",
       salary_max: defaultValues?.salary?.max?.toString() || "",
@@ -271,16 +271,16 @@ export default function ApplicationForm({
     setSubmitting(true);
 
     const salary =
-      values.salary_mode === "negotiable"
-        ? { mode: "negotiable" as const }
-        : values.salary_mode === "exact"
+      values.salary_mode === "Negotiable"
+        ? { mode: "Negotiable" as const }
+        : values.salary_mode === "Exact"
           ? {
-              mode: "exact" as const,
+              mode: "Exact" as const,
               amount: Number(values.salary_amount),
               currency: values.salary_currency,
             }
           : {
-              mode: "range" as const,
+              mode: "Range" as const,
               min: Number(values.salary_min),
               max: Number(values.salary_max),
               currency: values.salary_currency,
@@ -446,15 +446,15 @@ export default function ApplicationForm({
       <div className="rounded-xl border bg-white dark:bg-neutral-800 backdrop-blur-sm px-5 py-4 flex flex-col gap-4">
         <Field label="Salary">
           <PillGroup
-            options={["negotiable", "exact", "range"]}
+            options={["Negotiable", "Exact", "Range"]}
             value={watch("salary_mode")}
             onChange={(v) =>
-              setValue("salary_mode", v as "negotiable" | "exact" | "range")
+              setValue("salary_mode", v as "Negotiable" | "Exact" | "Range")
             }
           />
         </Field>
 
-        {salaryMode !== "negotiable" && (
+        {salaryMode !== "Negotiable" && (
           <div className="flex gap-2">
             <select
               {...register("salary_currency")}
@@ -467,7 +467,7 @@ export default function ApplicationForm({
               <option>EUR</option>
               <option>GBP</option>
             </select>
-            {salaryMode === "exact" && (
+            {salaryMode === "Exact" && (
               <input
                 {...register("salary_amount")}
                 type="number"
@@ -475,7 +475,7 @@ export default function ApplicationForm({
                 className={`${inputCls} flex-1`}
               />
             )}
-            {salaryMode === "range" && (
+            {salaryMode === "Range" && (
               <>
                 <input
                   {...register("salary_min")}

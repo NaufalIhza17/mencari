@@ -74,9 +74,9 @@ export default function ApplicationCard({ app }: Props) {
     if (!app.salary) return null;
     const { mode, amount, min, max, currency = "IDR" } = app.salary;
     const fmt = (n: number) => n.toLocaleString("id-ID");
-    if (mode === "negotiable") return "Negotiable";
-    if (mode === "exact" && amount) return `${currency} ${fmt(amount)}`;
-    if (mode === "range" && min && max)
+    if (mode === "Negotiable") return "Negotiable";
+    if (mode === "Exact" && amount) return `${currency} ${fmt(amount)}`;
+    if (mode === "Range" && min && max)
       return `${currency} ${fmt(min)} – ${fmt(max)}`;
     return null;
   };

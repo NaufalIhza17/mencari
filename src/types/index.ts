@@ -7,6 +7,7 @@ export type EmploymentType =
   | "Internship";
 export type Priority = "Low" | "Medium" | "High";
 export type SalaryMode = "exact" | "range" | "negotiable";
+export type Source = "LinkedIn" | "JobStreet" | "Glassdoor" | "Referral" | "Company website" | "Other";
 
 export interface Salary {
   mode: SalaryMode;

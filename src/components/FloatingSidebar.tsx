@@ -62,7 +62,7 @@ export default function FloatingSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed left-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-1 p-1.5 rounded-2xl border bg-white dark:bg-neutral-800 backdrop-blur-md shadow-sm">
+    <div className="fixed left-4 top-[85%] md:top-1/2 -translate-y-1/2 z-50 flex flex-col gap-1 p-1.5 rounded-2xl border bg-white dark:bg-neutral-800 backdrop-blur-md shadow-sm">
       {NAV.map((item) => {
         const active = pathname === item.href;
         return (

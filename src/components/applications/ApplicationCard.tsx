@@ -129,7 +129,7 @@ export default function ApplicationCard({ app }: Props) {
       {/* three dot menu */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="shrink-0 w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors opacity-0 group-hover:opacity-100">
+          <button className="shrink-0 w-7 h-7 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors opacity-20 group-hover:opacity-100">
             <svg width="15" height="15" viewBox="0 0 15 15" fill="currentColor">
               <circle cx="7.5" cy="2.5" r="1.5" />
               <circle cx="7.5" cy="7.5" r="1.5" />

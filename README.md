@@ -1,61 +1,36 @@
 # mencari
 
-A job application tracker for fresh graduates and active job seekers.
+A minimal job application tracker for fresh graduates and active job seekers.
 
-Built with Next.js 14, TypeScript, TailwindCSS, ShadcnUI, and Supabase.
-
-## Tech Stack
-
-- **Frontend** — Next.js 14, TypeScript, TailwindCSS, shadcn/ui
-- **State** — Zustand
-- **Backend** — Next.js API Routes
-- **Database & Auth** — Supabase (PostgreSQL + Row Level Security)
-- **Deployment** — Vercel
+Built to solve a simple problem — keeping track of where you've applied, what stage you're at, and what's next.
 
 ## Features
 
-- Google login via Supabase Auth
-- Add and manage job applications
-- Track stages: Applied → Interview → Offer / Rejected
-- Personal notes per application
-- Dashboard with stats and response rate
-- Export applications to CSV
+- Google OAuth — one-click sign in, no passwords
+- Add, edit, and delete job applications
+- Track stages: Applied, Interview, Offer, Rejected
+- Filter and sort by status, priority, salary, name, and date
+- Location search powered by OpenStreetMap
+- Salary input with exact, range, or negotiable modes
+- Confident deletion with swipe-out animation
+- Smooth UI transitions with Framer Motion
+- Light / dark mode with view transition animation
+- Fully responsive — works on mobile and desktop
+- Support via Saweria
 
-## Getting Started
+## Tech Stack
 
-### Prerequisites
+- **Framework** — Next.js 16, TypeScript
+- **Styling** — TailwindCSS, shadcn/ui
+- **Animation** — Framer Motion
+- **State** — Zustand
+- **Database & Auth** — Supabase (PostgreSQL + Row Level Security)
+- **Deployment** — Vercel
 
-- Node.js v18.17+
-- A [Supabase](https://supabase.com) project
+## Built with the help of
 
-### Installation
-
-```bash
-git clone https://github.com/yourusername/mencari.git
-cd mencari
-npm install
-```
-
-### Environment Variables
-
-Create a `.env.local` file in the root:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-### Run locally
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-## Deployment
-
-This project is deployed on Vercel. Add the environment variables above in your Vercel project settings under **Settings → Environment Variables**.
+- [Claude](https://claude.ai) by Anthropic
+- [ChatGPT](https://chatgpt.com) by OpenAI
 
 ## License
 

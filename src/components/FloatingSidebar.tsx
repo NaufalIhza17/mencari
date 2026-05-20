@@ -105,6 +105,7 @@ export default function FloatingSidebar() {
               key={item.href}
               href={item.href}
               title={item.label}
+              target={item.target}
               className="relative w-9 h-9 flex items-center justify-center"
             >
               {active && (

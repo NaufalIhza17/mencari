@@ -142,10 +142,10 @@ export default function ApplicationList() {
           {/* sort trigger pill */}
           <button
             onClick={() => setSortOpen((o) => !o)}
-            className={`relative flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors shrink-0 ${
+            className={`relative flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-black/10 dark:border-white/10 transition-colors shrink-0 ${
               sortOpen
-                ? "bg-foreground text-background border-foreground"
-                : "text-muted-foreground border-border"
+                ? "bg-foreground text-background"
+                : "text-muted-foreground"
             }`}
           >
             <span>Sort: {activeSort?.label}</span>
@@ -188,7 +188,7 @@ export default function ApplicationList() {
                           setSort(s.value);
                           setSortOpen(false);
                         }}
-                        className="relative flex items-center px-3 py-1 rounded-full text-xs font-medium border transition-colors shrink-0"
+                        className="relative flex items-center px-3 py-1 rounded-full text-xs font-medium border border-black/10 dark:border-white/10 transition-colors shrink-0"
                       >
                         {active && (
                           <motion.div
@@ -212,7 +212,7 @@ export default function ApplicationList() {
         </div>
 
         {/* divider */}
-        <div className="w-px h-5 bg-white/10 shrink-0" />
+        <div className="w-px h-5 bg-black/10 dark:bg-white/10 shrink-0" />
 
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-none md:overflow-hidden">
           {FILTERS.map((f) => {
@@ -225,7 +225,7 @@ export default function ApplicationList() {
               <button
                 key={f.value}
                 onClick={() => setFilter(f.value)}
-                className="relative flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors"
+                className="relative flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-black/10 dark:border-white/10 transition-colors"
               >
                 {active && (
                   <motion.div

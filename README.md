@@ -4,6 +4,8 @@ A minimal job application tracker for fresh graduates and active job seekers.
 
 Built to solve a simple problem — keeping track of where you've applied, what stage you're at, and what's next.
 
+🌐 [mencari.vercel.app](https://mencari.vercel.app)
+
 ## Features
 
 - Google OAuth — one-click sign in, no passwords
@@ -31,6 +33,12 @@ Built to solve a simple problem — keeping track of where you've applied, what 
 
 - [Claude](https://claude.ai) by Anthropic
 - [ChatGPT](https://chatgpt.com) by OpenAI
+
+## Support
+
+If you find this project useful, consider buying me a coffee ☕
+
+[saweria.co/ihzasyahzada](https://saweria.co/ihzasyahzada)
 
 ## License
 

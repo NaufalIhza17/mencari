@@ -1,4 +1,4 @@
-export type Status = "Applied" | "Interview" | "Offer" | "Rejected";
+export type Status = "Applied" | "Interview" | "Offer" | "Rejected" | "Accepted";
 export type WorkType = "Remote" | "Hybrid" | "On-site";
 export type EmploymentType =
   | "Full-time"

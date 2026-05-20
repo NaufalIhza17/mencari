@@ -45,6 +45,10 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background text-foreground flex flex-col">
         {children}
+        <p className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-black/40 dark:text-white/40 whitespace-nowrap">
+          ⟡ ── made by{" "}
+          <span className="text-black/60 dark:text-white/60">KAIEL</span> ── ⟡
+        </p>
         <Toaster position="bottom-right" />
       </body>
     </html>

@@ -14,12 +14,15 @@ import {
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { triggerCelebration } from "@/components/ConfettiCelebration";
 
 const STATUS_STYLES: Record<Status, string> = {
   Applied: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
   Interview: "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
   Offer: "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300",
   Rejected: "bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300",
+  Accepted:
+    "bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-300",
 };
 
 const PRIORITY_DOT: Record<string, string> = {
@@ -82,6 +85,66 @@ export default function ApplicationCard({ app }: Props) {
     } else {
       toast("Application deleted.");
     }
+  };
+
+  const handleAccept = async () => {
+    const prev = app.status;
+    updateApplication(app.id, { status: "Accepted" });
+
+    const res = await fetch(`/api/applications/${app.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "Accepted" }),
+    });
+
+    if (!res.ok) {
+      updateApplication(app.id, { status: prev });
+      toast.error("Failed to update status.");
+      return;
+    }
+
+    triggerCelebration();
+    toast("🎉 Congratulations! You landed it!", {
+      duration: 5000,
+    });
+  };
+
+  const handleInterview = async () => {
+    const prev = app.status;
+    updateApplication(app.id, { status: "Interview" });
+
+    const res = await fetch(`/api/applications/${app.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "Interview" }),
+    });
+
+    if (!res.ok) {
+      updateApplication(app.id, { status: prev });
+      toast.error("Failed to update status.");
+      return;
+    }
+
+    toast("Mark as interview.");
+  };
+
+  const handleOffer = async () => {
+    const prev = app.status;
+    updateApplication(app.id, { status: "Offer" });
+
+    const res = await fetch(`/api/applications/${app.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "Offer" }),
+    });
+
+    if (!res.ok) {
+      updateApplication(app.id, { status: prev });
+      toast.error("Failed to update status.");
+      return;
+    }
+
+    toast("Mark as offer.");
   };
 
   const formatSalary = () => {
@@ -203,16 +266,28 @@ export default function ApplicationCard({ app }: Props) {
                 >
                   Edit
                 </DropdownMenuItem>
+                {app.status !== "Interview" && (
+                  <DropdownMenuItem onClick={handleInterview}>
+                    Mark as Interview
+                  </DropdownMenuItem>
+                )}
+                {app.status !== "Offer" && (
+                  <DropdownMenuItem onClick={handleOffer}>
+                    Mark as Offer
+                  </DropdownMenuItem>
+                )}
                 {app.status !== "Rejected" && (
                   <DropdownMenuItem onClick={handleReject}>
                     Mark as Rejected
                   </DropdownMenuItem>
                 )}
+                {app.status !== "Accepted" && (
+                  <DropdownMenuItem onClick={handleAccept}>
+                    Mark as Accepted 🎉
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={handleDelete}
-                  className="text-red-600 focus:text-red-600"
-                >
+                <DropdownMenuItem onClick={handleDelete}>
                   Delete
                 </DropdownMenuItem>
               </DropdownMenuContent>

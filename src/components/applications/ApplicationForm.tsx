@@ -20,7 +20,7 @@ import { Calendar } from "@/components/ui/calendar";
 const schema = z.object({
   company: z.string().min(1, "Company is required"),
   role: z.string().min(1, "Role is required"),
-  status: z.enum(["Applied", "Interview", "Offer", "Rejected"]),
+  status: z.enum(["Applied", "Interview", "Offer", "Rejected", "Accepted"]),
   date_submitted: z.string().min(1, "Date is required"),
   job_url: z.string().url("Must be a valid URL").or(z.literal("")).optional(),
   work_type: z.enum(["Remote", "Hybrid", "On-site"]),
@@ -356,7 +356,7 @@ export default function ApplicationForm({
       <div className="rounded-xl border bg-white dark:bg-neutral-800 backdrop-blur-sm px-5 py-4 flex flex-col gap-4">
         <Field label="Status">
           <PillGroup
-            options={["Applied", "Interview", "Offer", "Rejected"]}
+            options={["Applied", "Interview", "Offer", "Rejected", "Accepted"]}
             value={watch("status")}
             onChange={(v) => setValue("status", v)}
           />

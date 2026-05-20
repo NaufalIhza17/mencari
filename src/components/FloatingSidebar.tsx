@@ -64,6 +64,7 @@ const NAV = [
     href: "https://saweria.co/ihzasyahzada",
     label: "Saweria",
     target: "_blank",
+    border: true,
     icon: (
       <svg
         width="16"
@@ -101,59 +102,68 @@ export default function FloatingSidebar() {
         {NAV.map((item, i) => {
           const active = activeIndex === i;
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              title={item.label}
-              target={item.target}
-              className="relative w-9 h-9 flex items-center justify-center"
-            >
-              {active && (
-                <motion.div
-                  layoutId="desktop-indicator"
-                  className="absolute inset-0 rounded-xl bg-foreground"
-                  transition={spring}
-                />
+            <div key={item.href} className="flex flex-col">
+              {item.border && (
+                <div className="h-px w-[75%] mx-auto my-1 bg-black/10 dark:bg-white/10 shrink-0" />
               )}
-              <span
-                className={`relative z-10 transition-colors duration-150 ${
-                  active
-                    ? "text-background"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+              <Link
+                href={item.href}
+                title={item.label}
+                target={item.target}
+                className="relative w-9 h-9 flex items-center justify-center"
               >
-                {item.icon}
-              </span>
-            </Link>
+                {active && (
+                  <motion.div
+                    layoutId="desktop-indicator"
+                    className="absolute inset-0 rounded-xl bg-foreground"
+                    transition={spring}
+                  />
+                )}
+                <span
+                  className={`relative z-10 transition-colors duration-150 ${
+                    active
+                      ? "text-background"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {item.icon}
+                </span>
+              </Link>
+            </div>
           );
         })}
       </div>
 
       {/* mobile — floating bottom pill */}
-      <div className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 p-1.5 rounded-2xl border bg-white dark:bg-neutral-800 shadow-sm">
+      <div className="md:hidden fixed bottom-7 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 p-1.5 rounded-2xl border bg-white dark:bg-neutral-800 shadow-sm">
         {NAV.map((item, i) => {
           const active = activeIndex === i;
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="relative w-12 h-10 flex items-center justify-center"
-            >
-              {active && (
-                <motion.div
-                  layoutId="mobile-indicator"
-                  className="absolute inset-0 rounded-xl bg-muted"
-                  transition={spring}
-                />
+            <div key={item.href} className="flex flex-row">
+              {item.border && (
+                <div className="w-px h-6 mx-1 my-auto bg-black/10 dark:bg-white/10 shrink-0" />
               )}
-              <span
-                className={`relative z-10 transition-colors duration-150 ${
-                  active ? "text-foreground" : "text-muted-foreground"
-                }`}
+              <Link
+                href={item.href}
+                target={item.target}
+                className="relative w-12 h-10 flex items-center justify-center"
               >
-                {item.icon}
-              </span>
-            </Link>
+                {active && (
+                  <motion.div
+                    layoutId="mobile-indicator"
+                    className="absolute inset-0 rounded-xl bg-muted"
+                    transition={spring}
+                  />
+                )}
+                <span
+                  className={`relative z-10 transition-colors duration-150 ${
+                    active ? "text-foreground" : "text-muted-foreground"
+                  }`}
+                >
+                  {item.icon}
+                </span>
+              </Link>
+            </div>
           );
         })}
       </div>

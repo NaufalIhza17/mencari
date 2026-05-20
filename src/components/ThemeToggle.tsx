@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
     const isDark = saved === "dark";
     setDark(isDark);
     document.documentElement.classList.toggle("dark", isDark);
@@ -17,13 +15,32 @@ export default function ThemeToggle() {
 
   const toggle = () => {
     const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
+
+    if (!document.startViewTransition) {
+      setDark(next);
+      document.documentElement.classList.toggle("dark", next);
+      localStorage.setItem("theme", next ? "dark" : "light");
+      return;
+    }
+
+    if (btnRef.current) {
+      const rect = btnRef.current.getBoundingClientRect();
+      const x = Math.round(rect.left + rect.width / 2);
+      const y = Math.round(rect.top + rect.height / 2);
+      document.documentElement.style.setProperty("--theme-toggle-x", `${x}px`);
+      document.documentElement.style.setProperty("--theme-toggle-y", `${y}px`);
+    }
+
+    document.startViewTransition(() => {
+      setDark(next);
+      document.documentElement.classList.toggle("dark", next);
+      localStorage.setItem("theme", next ? "dark" : "light");
+    });
   };
 
   return (
     <button
+      ref={btnRef}
       onClick={toggle}
       className="w-8 h-8 rounded-lg border flex items-center justify-center text-muted-foreground hover:text-foreground bg-white dark:bg-neutral-800 hover:bg-muted transition-colors"
       aria-label="Toggle theme"

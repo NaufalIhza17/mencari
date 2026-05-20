@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 const NAV = [
   {
@@ -58,56 +59,81 @@ const NAV = [
   },
 ];
 
+const spring = {
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 30,
+};
+
 export default function FloatingSidebar() {
   const pathname = usePathname();
+  const activeIndex = NAV.findIndex((item) => item.href === pathname);
 
   return (
     <>
       {/* desktop — floating left sidebar */}
-      <div className="hidden md:flex fixed left-4 top-1/2 -translate-y-1/2 z-50 flex-col gap-1 p-1.5 rounded-2xl border bg-background/70 backdrop-blur-md shadow-sm">
-        {NAV.map((item) => {
-          const active = pathname === item.href;
+      <div className="hidden md:flex fixed left-4 top-1/2 -translate-y-1/2 z-50 flex-col p-1.5 rounded-2xl border bg-white dark:bg-neutral-800 shadow-sm">
+        {NAV.map((item, i) => {
+          const active = activeIndex === i;
           return (
             <Link
               key={item.href}
               href={item.href}
               title={item.label}
-              className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
-                active
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
-              }`}
+              className="relative w-9 h-9 flex items-center justify-center"
             >
-              {item.icon}
+              {active && (
+                <motion.div
+                  layoutId="desktop-indicator"
+                  className="absolute inset-0 rounded-xl bg-foreground"
+                  transition={spring}
+                />
+              )}
+              <span
+                className={`relative z-10 transition-colors duration-150 ${
+                  active
+                    ? "text-background"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {item.icon}
+              </span>
             </Link>
           );
         })}
       </div>
 
-      {/* mobile — fixed bottom bar */}
-      <div className="md:hidden fixed bottom-0 left-1/2 -translate-x-1/2 z-50 mb-3 w-fit rounded-2xl flex items-center justify-around gap-4 px-6 py-3 border bg-background/70 backdrop-blur-md">
-        {NAV.map((item) => {
-          const active = pathname === item.href;
+      {/* mobile — floating bottom pill */}
+      <div className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 p-1.5 rounded-2xl border bg-white dark:bg-neutral-800 shadow-sm">
+        {NAV.map((item, i) => {
+          const active = activeIndex === i;
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center gap-1 transition-colors ${
-                active ? "text-foreground" : "text-muted-foreground"
-              }`}
+              className="relative w-12 h-10 flex items-center justify-center"
             >
-              <div
-                className={`p-2 rounded-xl transition-colors ${active ? "bg-muted" : ""}`}
+              {active && (
+                <motion.div
+                  layoutId="mobile-indicator"
+                  className="absolute inset-0 rounded-xl bg-muted"
+                  transition={spring}
+                />
+              )}
+              <span
+                className={`relative z-10 transition-colors duration-150 ${
+                  active ? "text-foreground" : "text-muted-foreground"
+                }`}
               >
                 {item.icon}
-              </div>
+              </span>
             </Link>
           );
         })}
       </div>
 
-      {/* mobile bottom padding so content isn't hidden behind the bar */}
-      <div className="md:hidden h-6" />
+      {/* mobile bottom padding */}
+      <div className="md:hidden h-5" />
     </>
   );
 }

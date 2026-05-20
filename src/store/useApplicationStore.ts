@@ -1,17 +1,21 @@
 import { create } from "zustand";
 import { Application, Status } from "@/types";
 
+export type SortOption = "date" | "priority" | "salary" | "name";
+
 interface ApplicationStore {
   applications: Application[];
   isLoading: boolean;
   filter: Status | "all";
   search: string;
+  sort: SortOption;
   setApplications: (apps: Application[]) => void;
   addApplication: (app: Application) => void;
   updateApplication: (id: string, updates: Partial<Application>) => void;
   removeApplication: (id: string) => void;
   setFilter: (filter: Status | "all") => void;
   setSearch: (search: string) => void;
+  setSort: (sort: SortOption) => void;
 }
 
 export const useApplicationStore = create<ApplicationStore>((set) => ({
@@ -19,6 +23,7 @@ export const useApplicationStore = create<ApplicationStore>((set) => ({
   isLoading: false,
   filter: "all",
   search: "",
+  sort: "date",
   setApplications: (apps) => set({ applications: apps }),
   addApplication: (app) =>
     set((state) => ({ applications: [app, ...state.applications] })),
@@ -34,4 +39,5 @@ export const useApplicationStore = create<ApplicationStore>((set) => ({
     })),
   setFilter: (filter) => set({ filter }),
   setSearch: (search) => set({ search }),
+  setSort: (sort) => set({ sort }),
 }));

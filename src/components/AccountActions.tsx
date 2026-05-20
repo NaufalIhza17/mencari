@@ -42,9 +42,9 @@ export default function AccountActions() {
       </button>
 
       {/* delete */}
-      <div className="rounded-xl border border-red-200 dark:border-red-900 bg-background/60 backdrop-blur-sm px-5 py-4 flex items-center justify-between gap-4">
+      <div className="rounded-xl border border-red-900 bg-red-900/10 backdrop-blur-sm px-5 py-4 flex items-center justify-between gap-4">
         <div>
-          <p className="text-sm font-medium text-red-600 dark:text-red-400">
+          <p className="text-sm font-medium text-red-900 dark:text-red-400">
             Delete account
           </p>
           <p className="text-xs text-muted-foreground mt-0.5">
@@ -55,7 +55,7 @@ export default function AccountActions() {
         {!confirming ? (
           <button
             onClick={() => setConfirming(true)}
-            className="shrink-0 text-xs px-3 py-1.5 rounded-lg border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950 transition-colors"
+            className="shrink-0 text-xs px-3 py-1.5 rounded-lg border border-red-900 text-red-900 dark:text-white hover:bg-red-50 dark:hover:bg-red-950 transition-colors"
           >
             Delete
           </button>
